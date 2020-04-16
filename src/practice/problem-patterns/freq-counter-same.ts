@@ -4,24 +4,22 @@
  * The frequency of values must be the same
  */
 export function same(nums: number[], squaredNums: number[]): boolean {
-  if (nums.length !== squaredNums.length) return false;
+  if (nums.length !== squaredNums.length) 
+    return false;
 
-  const map = new Map<number, number>();
-  for (const num of squaredNums) {
-    const freq = map.get(num);
-
-    map.set(num, freq === undefined ? 1 : freq + 1);
+  const frequency: ObjectMap<number> = {};
+  for (const sn of squaredNums) {
+    frequency[sn] = (frequency[sn] || 0) + 1;
   }
 
   for (const num of nums) {
     const sn = num ** 2;
-    const freq = map.get(sn);
+    frequency[sn]--;
 
-    if (freq === undefined || freq <= 0) return false;
-    else map.set(sn, freq - 1);
+    if (frequency[sn] === -1) return false;
   }
 
-  return [...map.values()].every((freq) => freq == 0);
+  return true;
 }
 
 export function sameNaiveApproach(
