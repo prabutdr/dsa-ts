@@ -3,11 +3,15 @@
  * corresponding value squared in the second array.
  * The frequency of values must be the same
  */
-export function same(nums: number[], squaredNums: number[]): boolean {
+export function same(
+  nums: number[], 
+  squaredNums: number[]
+): boolean {
   if (nums.length !== squaredNums.length) 
     return false;
 
   const frequency: ObjectMap<number> = {};
+
   for (const sn of squaredNums) {
     frequency[sn] = (frequency[sn] || 0) + 1;
   }
